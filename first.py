@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 
 options = webdriver.ChromeOptions()
-options.add_experimental_option('detach', True)  # не понял зачем это делаем?
+options.add_experimental_option('detach', True)  # Это же для предотвращения закрытия браузера?
 
 binary_yandex_driver_file = 'driver/yandexdriver.exe'  # path to YandexDriver
 
