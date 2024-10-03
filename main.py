@@ -3,6 +3,7 @@ from chromebrowser import ChromeBrowser
 from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
+
 url = 'https://saucedemo.com'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
