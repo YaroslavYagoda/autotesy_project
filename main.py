@@ -12,7 +12,10 @@ ibrowser = MsEdge()
 
 ibrowser.get_url(url)
 
-ibrowser.send_keys_by_id('user-name', 'standard_user')
-ibrowser.send_keys_by_id('password', 'secret_sauce')
+ibrowser.send_keys_by_xpath("//input[@id='user-name']",'standard_user')
+ibrowser.send_keys_by_xpath("//input[@id='password']",'secret_sauce')
+
+# ibrowser.send_keys_by_id('user-name', 'standard_user')
+# ibrowser.send_keys_by_id('password', 'secret_sauce')
 # time.sleep(5)
 # ibrowser.quit()

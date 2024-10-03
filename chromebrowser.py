@@ -20,3 +20,7 @@ class ChromeBrowser:
     def send_keys_by_id(self, valueID: str, data: str):
         field = self.driver.find_element(By.ID, valueID)
         field.send_keys(data)
+
+    def send_keys_by_xpath(self, xpath: str, data: str):
+        field = self.driver.find_element(By.XPATH, xpath)
+        field.send_keys(data)
