@@ -24,3 +24,7 @@ class ChromeBrowser:
     def send_keys_by_xpath(self, xpath: str, data: str):
         field = self.driver.find_element(By.XPATH, xpath)
         field.send_keys(data)
+
+    def click_by_xpath(self, xpath: str, ):
+        field = self.driver.find_element(By.XPATH, xpath)
+        field.click()
