@@ -5,6 +5,10 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 class MsEdge(ChromeBrowser):
+    """
+    Браузер Microsoft Edge - дочерний класс "ChromeBrowser"
+    """
+
     def __init__(self):
         options = webdriver.EdgeOptions()
         options.add_experimental_option('detach', True)
