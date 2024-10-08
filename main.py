@@ -5,10 +5,9 @@ from firefoxbrowser import FireFox
 
 url_base = 'https://saucedemo.com'
 
-# Ошибка в тексте адреса и контрольного элемента допущена намеренно!
-# Для корректной работы удалить "1" (поочередно)
-url_catalog = 'https://www.saucedemo.com/inventory.html1'
-element_catalog = 'Products1'
+
+url_catalog = 'https://www.saucedemo.com/inventory.html'
+element_catalog = 'Products'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)

@@ -10,4 +10,6 @@ class FireFox(ChromeBrowser):
     """
 
     def __init__(self):
-        self.driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        options = webdriver.FirefoxOptions()
+        options.add_argument('--headless')
+        self.driver = webdriver.Firefox(options=options, service=FirefoxService(GeckoDriverManager().install()))
