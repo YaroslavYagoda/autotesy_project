@@ -4,8 +4,6 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 
 url_base = 'https://saucedemo.com'
-
-
 url_catalog = 'https://www.saucedemo.com/inventory.html'
 element_catalog = 'Products'
 
