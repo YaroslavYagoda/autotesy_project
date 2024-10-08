@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -75,3 +76,11 @@ class ChromeBrowser:
         assert check_element == self.driver.find_element(By.XPATH, xpath).text, (f'Контрольный элемент '
                                                                                  f'{check_element} не найден')
         print(f'Проверка наличия контрольного элемента "{check_element}" проведена успешно')
+
+    def check_element_and_his_null_text(self, xpath: str):
+        try:
+            text = self.driver.find_element(By.XPATH, xpath).text
+        except NoSuchElementException:
+            pass
+        else:
+            assert text == '', text
