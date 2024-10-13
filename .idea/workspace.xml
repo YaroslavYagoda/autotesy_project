@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Проверка ввода для нескольких пользователей и разных паролей">
+    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Добавил обновление и паузу, в коде строки 31-34">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chromebrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/chromebrowser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firefoxbrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/firefoxbrowser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msedgebrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/msedgebrowser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yandexbrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/yandexbrowser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728397561170</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Добавил обновление и паузу, в коде строки 31-34">
+      <option name="closed" value="true" />
+      <created>1728804034865</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728804034865</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,6 +244,7 @@
     <MESSAGE value="добавлен --headless, убрал &quot;ошибки&quot; контрольных элементов" />
     <MESSAGE value=" убрал &quot;ошибки&quot; контрольных элементов" />
     <MESSAGE value="Проверка ввода для нескольких пользователей и разных паролей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Проверка ввода для нескольких пользователей и разных паролей" />
+    <MESSAGE value="Добавил обновление и паузу, в коде строки 31-34" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил обновление и паузу, в коде строки 31-34" />
   </component>
 </project>
