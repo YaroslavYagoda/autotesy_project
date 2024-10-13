@@ -4,6 +4,7 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 from selenium.webdriver.common.keys import Keys
+
 url_base = 'https://saucedemo.com'
 url_catalog = 'https://www.saucedemo.com/inventory.html'
 element_catalog = 'Products'
@@ -12,7 +13,7 @@ password_tuple = ('secret_sauce', 'wrong_password', '')
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
-browser_tuple = (YaBrowser, MsEdge, FireFox)
+browser_tuple = (YaBrowser, MsEdge)
 
 # Сначала проверка для действительного пароля для всех юзеров (и пустого)
 # Затем для некорректного пароля и пустого
@@ -27,21 +28,21 @@ for password in password_tuple:
                 ibrowser.get_url(url_base)
 
                 # ВВод логина и пароля для дальнейшей работы
-                ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
-                ibrowser.send_keys_by_xpath("//input[@id='password']", password)
-                sleep(2)
+                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
+                # ibrowser.send_keys_by_xpath("//input[@id='password']", password)
+                # sleep(2)
 
                 # Имитация нажатия клавиш
-                ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.CONTROL + 'a')
-                sleep(2)
-                ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.BACKSPACE)
-                sleep(1)
+                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.CONTROL + 'a')
+                # sleep(2)
+                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.BACKSPACE)
+                # sleep(1)
 
                 # Вариант без импорта Keys
-                ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue009 a')
-                sleep(2)
-                ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue003')
-                sleep(3)
+                # ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue009 a')
+                # sleep(2)
+                # ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue003')
+                # sleep(3)
 
                 # Авторизация на сайте
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
@@ -65,6 +66,11 @@ for password in password_tuple:
                 print(f'\n✅Проверка для браузера {browser.__name__} проведена успешно')
 
             finally:
+                # Скриншот в media_report/*
+                sleep(2)
+                screenshot_name = f'{browser.__name__}.{user}.{password}'
+                ibrowser.make_scrinshot(screenshot_name)
+
                 # Закрытие браузера
                 ibrowser.quit()
                 print(f'Процесс браузера {browser.__name__} завершен\n\n')

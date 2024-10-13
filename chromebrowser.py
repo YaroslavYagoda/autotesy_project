@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from datetime import datetime
 
 
 class ChromeBrowser:
@@ -13,7 +14,7 @@ class ChromeBrowser:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_experimental_option('detach', True)
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
 
     def get_url(self, url: str):
@@ -84,3 +85,8 @@ class ChromeBrowser:
             pass
         else:
             assert text == '', text
+
+    def make_scrinshot(self, screenshot_name: str):
+        now = datetime.now().strftime('%d.%m.%Y, %H.%M.%S')
+        self.driver.save_screenshot(f'media_report/{screenshot_name} {now}.png')
+        print('Скриншот сохранен!')
