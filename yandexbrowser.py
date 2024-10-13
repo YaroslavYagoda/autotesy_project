@@ -12,5 +12,5 @@ class YaBrowser(ChromeBrowser):
         binary_yandex_driver_file = 'driver/yandexdriver.exe'
         options = webdriver.ChromeOptions()
         options.add_experimental_option('detach', True)
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options, service=ChromeService(binary_yandex_driver_file))

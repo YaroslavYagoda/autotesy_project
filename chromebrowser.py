@@ -13,7 +13,7 @@ class ChromeBrowser:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_experimental_option('detach', True)
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
 
     def get_url(self, url: str):

@@ -2,6 +2,7 @@ from chromebrowser import ChromeBrowser
 from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
+from time import sleep
 
 url_base = 'https://saucedemo.com'
 url_catalog = 'https://www.saucedemo.com/inventory.html'
@@ -11,7 +12,7 @@ password_tuple = ('secret_sauce', 'wrong_password', '')
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
-browser_tuple = (YaBrowser, MsEdge, FireFox)
+browser_tuple = (YaBrowser,MsEdge, FireFox)
 
 # Сначала проверка для действительного пароля для всех юзеров (и пустого)
 # Затем для некорректного пароля и пустого
@@ -26,6 +27,11 @@ for password in password_tuple:
                 ibrowser.get_url(url_base)
 
                 # Авторизация на сайте
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
+                # обновление поставлено здесь так как ошибочный ввод логина или пароля поднимает исключение
+                sleep(3)
+                ibrowser.driver.refresh()
+                sleep(3)
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", password)
                 ibrowser.click_by_xpath("//input[@id='login-button']")

@@ -12,5 +12,5 @@ class MsEdge(ChromeBrowser):
     def __init__(self):
         options = webdriver.EdgeOptions()
         options.add_experimental_option('detach', True)
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         self.driver = webdriver.Edge(options=options, service=MsEdgeService(EdgeChromiumDriverManager().install()))
