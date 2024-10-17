@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -90,3 +91,23 @@ class ChromeBrowser:
         now = datetime.now().strftime('%d.%m.%Y, %H.%M.%S')
         self.driver.save_screenshot(f'media_report/{screenshot_name} {now}.png')
         print('Скриншот сохранен!')
+
+    def add_all_products_to_cart(self):
+        print('Добавление товаров в корзину:')
+        products = self.driver.find_elements(By.XPATH, "//div[@class='inventory_item_name ']")
+        products_name_list = []
+        for product in products:
+            products_name_list.append(product.text)
+        buttons = self.driver.find_elements(By.XPATH,
+                                            "//button[@class='btn btn_primary btn_small btn_inventory ']")
+        counter = 0
+        for button in buttons:
+            button.click()
+            print(f'\t Товар "{products_name_list[counter]}" добавлен в корзину')
+            counter += 1
+        print(f'\n\tВсего в корзину добавлено позиций: {counter}')
+
+    def scroll_to_last_element_in_cart(self):
+        elements = self.driver.find_elements(By.XPATH, "//div[@class='cart_item']")
+        elements = list(elements)
+        ActionChains(self.driver).move_to_element(elements[-1]).perform()

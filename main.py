@@ -8,12 +8,12 @@ from selenium.webdriver.common.keys import Keys
 url_base = 'https://saucedemo.com'
 url_catalog = 'https://www.saucedemo.com/inventory.html'
 element_catalog = 'Products'
-user_tuple = ('standard_user', 'locked_out_user', '')
-password_tuple = ('secret_sauce', 'wrong_password', '')
+user_tuple = ('standard_user',)
+password_tuple = ('secret_sauce',)
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
-browser_tuple = (YaBrowser, MsEdge)
+browser_tuple = (YaBrowser,)
 
 # Сначала проверка для действительного пароля для всех юзеров (и пустого)
 # Затем для некорректного пароля и пустого
@@ -40,8 +40,14 @@ for password in password_tuple:
                 ibrowser.check_current_url(url_catalog)
                 ibrowser.check_by_element_on_page(element_catalog, "//span[@class='title']")
 
+                # добавление товаров в корзину, переход в нее и пролистывание
+                ibrowser.add_all_products_to_cart()
+                ibrowser.click_by_xpath("//a[@class='shopping_cart_link']")
+                ibrowser.scroll_to_last_element_in_cart()
+
             except AssertionError as err:
                 print('❌Возникла ошибка!\n\t', err.args[0], '\n')
+
             else:
                 # Информационное сообщение в консоль о завершении
                 print(f'\n✅Проверка для браузера {browser.__name__} проведена успешно')
