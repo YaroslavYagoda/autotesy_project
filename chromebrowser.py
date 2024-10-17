@@ -86,7 +86,7 @@ class ChromeBrowser:
         else:
             assert text == '', text
 
-    def make_scrinshot(self, screenshot_name: str):
+    def make_screenshot(self, screenshot_name: str):
         now = datetime.now().strftime('%d.%m.%Y, %H.%M.%S')
         self.driver.save_screenshot(f'media_report/{screenshot_name} {now}.png')
         print('Скриншот сохранен!')

@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="имитация нажатия клавиш, в коде строки 34-44">
+    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Сохранения скриншота с использованием текущей даты и времени">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chromebrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/chromebrowser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firefoxbrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/firefoxbrowser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msedgebrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/msedgebrowser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yandexbrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/yandexbrowser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728806426648</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Сохранения скриншота с использованием текущей даты и времени">
+      <option name="closed" value="true" />
+      <created>1728809977679</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728809977679</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,6 +263,7 @@
     <MESSAGE value="Проверка ввода для нескольких пользователей и разных паролей" />
     <MESSAGE value="Добавил обновление и паузу, в коде строки 31-34" />
     <MESSAGE value="имитация нажатия клавиш, в коде строки 34-44" />
-    <option name="LAST_COMMIT_MESSAGE" value="имитация нажатия клавиш, в коде строки 34-44" />
+    <MESSAGE value="Сохранения скриншота с использованием текущей даты и времени" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сохранения скриншота с использованием текущей даты и времени" />
   </component>
 </project>

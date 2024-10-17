@@ -19,7 +19,7 @@ browser_tuple = (YaBrowser, MsEdge)
 # Затем для некорректного пароля и пустого
 for password in password_tuple:
     for user in user_tuple:
-        print(f'{'*' * 30}\n\nЛогин:\n\t{user}\nПароль:\n\t{password}\n\n')
+        print(f'{'*' * 30}\n\nЛогин:\n\t"{user}"\nПароль:\n\t"{password}"\n\n')
         for browser in browser_tuple:
             ibrowser = browser()
             print(f'Начало проверки для браузера {browser.__name__}\n')
@@ -27,32 +27,13 @@ for password in password_tuple:
                 # Загрузка сайта
                 ibrowser.get_url(url_base)
 
-                # ВВод логина и пароля для дальнейшей работы
-                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
-                # ibrowser.send_keys_by_xpath("//input[@id='password']", password)
-                # sleep(2)
-
-                # Имитация нажатия клавиш
-                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.CONTROL + 'a')
-                # sleep(2)
-                # ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.BACKSPACE)
-                # sleep(1)
-
-                # Вариант без импорта Keys
-                # ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue009 a')
-                # sleep(2)
-                # ibrowser.send_keys_by_xpath("//input[@id='password']", '\ue003')
-                # sleep(3)
-
                 # Авторизация на сайте
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", password)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", Keys.ENTER)
-                # ibrowser.click_by_xpath("//input[@id='login-button']")
+
                 # проверка на наличия контейнера с ошибкой и вывод ее текста
                 ibrowser.check_element_and_his_null_text("//div[@class='error-message-container error']")
-                # не стал добавлять клик по крестику ibrowser.click_by_xpath("//button[@class='error-button']")
-                # тем более при вызове исключения метод не сработает или не будет проверенно исключение
                 print('Авторизация на сайте проведена')
 
                 # Проведение тестов
@@ -69,7 +50,7 @@ for password in password_tuple:
                 # Скриншот в media_report/*
                 sleep(2)
                 screenshot_name = f'{browser.__name__}.{user}.{password}'
-                ibrowser.make_scrinshot(screenshot_name)
+                ibrowser.make_screenshot(screenshot_name)
 
                 # Закрытие браузера
                 ibrowser.quit()
