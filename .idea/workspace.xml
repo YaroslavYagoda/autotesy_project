@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Исправил указанные ошибки и недочеты">
+    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Добавление товаров в корзину, ее открытие и пролистывание до последнего элемента">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chromebrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/chromebrowser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -243,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729173040467</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Добавление товаров в корзину, ее открытие и пролистывание до последнего элемента">
+      <option name="closed" value="true" />
+      <created>1729187187201</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1729187187201</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,6 +281,7 @@
     <MESSAGE value="имитация нажатия клавиш, в коде строки 34-44" />
     <MESSAGE value="Сохранения скриншота с использованием текущей даты и времени" />
     <MESSAGE value="Исправил указанные ошибки и недочеты" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил указанные ошибки и недочеты" />
+    <MESSAGE value="Добавление товаров в корзину, ее открытие и пролистывание до последнего элемента" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление товаров в корзину, ее открытие и пролистывание до последнего элемента" />
   </component>
 </project>

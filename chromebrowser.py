@@ -80,6 +80,11 @@ class ChromeBrowser:
         print(f'Проверка наличия контрольного элемента "{check_element}" проведена успешно')
 
     def check_element_and_his_null_text(self, xpath: str):
+        """
+        Для проверки наличия динамичных элементов (в данной работе проверка наличия окна ошибки авторизации)
+        :param xpath: XPATH элемента на странице
+        :return:
+        """
         try:
             text = self.driver.find_element(By.XPATH, xpath).text
         except NoSuchElementException:
@@ -88,26 +93,28 @@ class ChromeBrowser:
             assert text == '', text
 
     def make_screenshot(self, screenshot_name: str):
+        """
+        Сделать скриншот страницы и сохранить его в папку media_report
+        :param screenshot_name: к имени будет добавлена текущая дата и время
+        :return:
+        """
         now = datetime.now().strftime('%d.%m.%Y, %H.%M.%S')
         self.driver.save_screenshot(f'media_report/{screenshot_name} {now}.png')
         print('Скриншот сохранен!')
 
-    def add_all_products_to_cart(self):
-        print('Добавление товаров в корзину:')
-        products = self.driver.find_elements(By.XPATH, "//div[@class='inventory_item_name ']")
-        products_name_list = []
-        for product in products:
-            products_name_list.append(product.text)
-        buttons = self.driver.find_elements(By.XPATH,
-                                            "//button[@class='btn btn_primary btn_small btn_inventory ']")
-        counter = 0
-        for button in buttons:
-            button.click()
-            print(f'\t Товар "{products_name_list[counter]}" добавлен в корзину')
-            counter += 1
-        print(f'\n\tВсего в корзину добавлено позиций: {counter}')
+    def get_elements_as_list_by_xpath(self, xpath):
+        """
+        Элементы на странице по их XPATH в виде списка (find_elements(By.XPATH))
+        :param xpath: XPATH элементов на странице
+        :return: elements - список элементов на странице
+        """
+        elements = self.driver.find_elements(By.XPATH, xpath)
+        return elements
 
-    def scroll_to_last_element_in_cart(self):
-        elements = self.driver.find_elements(By.XPATH, "//div[@class='cart_item']")
-        elements = list(elements)
-        ActionChains(self.driver).move_to_element(elements[-1]).perform()
+    def scroll_to_element(self, element):
+        """
+        Скроллинг страницы до element
+        :param element:
+        :return:
+        """
+        ActionChains(self.driver).move_to_element(element).perform()
