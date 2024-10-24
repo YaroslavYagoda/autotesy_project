@@ -14,8 +14,6 @@ password_tuple = ('secret_sauce',)
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
 browser_tuple = (YaBrowser,)
 
-# Сначала проверка для действительного пароля для всех юзеров (и пустого)
-# Затем для некорректного пароля и пустого
 for password in password_tuple:
     for user in user_tuple:
         print(f'{'*' * 30}\n\nЛогин:\n\t"{user}"\nПароль:\n\t"{password}"\n\n')
@@ -26,11 +24,22 @@ for password in password_tuple:
                 # Загрузка сайта
                 ibrowser.get_url(url_base)
 
+                # ВВодит и Выделяет значения полей логин и пароль и удаляет значения полей
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", "какой-то логин")
+                ibrowser.send_keys_by_xpath("//input[@id='password']", "и пароль")
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", "\ue009 a")
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", "\ue017")
+                ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue009 a")
+                ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue003")
+
+
+
                 # Авторизация на сайте
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", password)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue007")
 
+                """
                 # проверка на наличия контейнера с ошибкой и вывод ее текста
                 ibrowser.check_element_and_his_null_text("//div[@class='error-message-container error']")
                 print('Авторизация на сайте проведена')
@@ -57,7 +66,7 @@ for password in password_tuple:
                 # пролистывание до последней позиции
                 products_in_cart = ibrowser.get_elements_as_list_by_xpath("//div[@class='cart_item']")
                 ibrowser.scroll_to_element(products_in_cart[-1])
-
+                """
             except AssertionError as err:
                 print('❌Возникла ошибка!\n\t', err.args[0], '\n')
 
