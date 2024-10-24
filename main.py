@@ -1,3 +1,5 @@
+from selenium.webdriver import Keys
+
 from chromebrowser import ChromeBrowser
 from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
@@ -12,7 +14,7 @@ password_tuple = ('secret_sauce',)
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
-browser_tuple = (YaBrowser,)
+browser_tuple = (MsEdge,)
 
 for password in password_tuple:
     for user in user_tuple:
@@ -27,17 +29,15 @@ for password in password_tuple:
                 # ВВодит и Выделяет значения полей логин и пароль и удаляет значения полей
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", "какой-то логин")
                 ibrowser.send_keys_by_xpath("//input[@id='password']", "и пароль")
-                ibrowser.send_keys_by_xpath("//input[@id='user-name']", "\ue009 a")
-                ibrowser.send_keys_by_xpath("//input[@id='user-name']", "\ue017")
-                ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue009 a")
-                ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue003")
-
-
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.CONTROL + "a")
+                ibrowser.send_keys_by_xpath("//input[@id='user-name']", Keys.DELETE)
+                ibrowser.send_keys_by_xpath("//input[@id='password']", Keys.CONTROL + "a")
+                ibrowser.send_keys_by_xpath("//input[@id='password']", Keys.BACKSPACE)
 
                 # Авторизация на сайте
                 ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
                 ibrowser.send_keys_by_xpath("//input[@id='password']", password)
-                ibrowser.send_keys_by_xpath("//input[@id='password']", "\ue007")
+                ibrowser.send_keys_by_xpath("//input[@id='password']", Keys.ENTER)
 
                 """
                 # проверка на наличия контейнера с ошибкой и вывод ее текста
