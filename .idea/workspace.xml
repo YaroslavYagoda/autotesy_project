@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Через модуль Keys">
+    <list default="true" id="a00d9fc1-415c-4e6d-8581-6470c6e4433c" name="Changes" comment="Готово">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/driver/yandexdriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/driver/yandexdriver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -283,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729770249430</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Готово">
+      <option name="closed" value="true" />
+      <created>1729846141835</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1729846141835</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,8 +323,8 @@
     <MESSAGE value="Исправил указанные ошибки и недочеты" />
     <MESSAGE value="Добавление товаров в корзину, ее открытие и пролистывание до последнего элемента" />
     <MESSAGE value="Исправил," />
-    <MESSAGE value="Готово" />
     <MESSAGE value="Через модуль Keys" />
-    <option name="LAST_COMMIT_MESSAGE" value="Через модуль Keys" />
+    <MESSAGE value="Готово" />
+    <option name="LAST_COMMIT_MESSAGE" value="Готово" />
   </component>
 </project>
