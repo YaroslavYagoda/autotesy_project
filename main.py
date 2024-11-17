@@ -7,9 +7,9 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://saucedemo.com'
-user = "standard_user"
-password = "secret_sauce"
+url_base = 'https://demoqa.com/checkbox'
+#user = "standard_user"
+#password = "secret_sauce"
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
 browser_tuple = (YaBrowser,)
@@ -17,23 +17,29 @@ browser_tuple = (YaBrowser,)
 for browser in browser_tuple:
     ibrowser = browser()
     print(f'Начало проверки для браузера {browser.__name__}\n')
+
     # Загрузка сайта
     ibrowser.get_url(url_base)
 
-    # Авторизация на сайте
-    ibrowser.send_keys_by_xpath("//input[@id='user-name']", user)
-    ibrowser.send_keys_by_xpath("//input[@id='password']", password)
-    ibrowser.send_keys_by_xpath("//input[@id='password']", Keys.ENTER)
-
-    # переход в корзину
-    ibrowser.click_by_xpath("//a[@class='shopping_cart_link']")
-
-    # Домашнее задание
-    sleep(1)
-    ibrowser.driver.back()
-    sleep(1)
-    ibrowser.driver.forward()
-
+    # Выбор и проверка чекбокса
+    check_box = ibrowser.driver.find_element(By.XPATH, '//span[@class="rct-checkbox"]')
+    check_box.click()
+    if check_box.is_selected():
+        print('Чек-бокс выбран')
+    else:
+        print('Чек-бокс не выбран')
+        sleep(2)
+    """
+    На самом деле локатор '//span[@class="rct-checkbox"]' не даст выбрать какой либо другой чек-бокс
+    кроме как первый, выбор локатора в уроке выбран странно я бы сделал по другому (ниже код)
+    """
+    check_box = ibrowser.driver.find_element(By.XPATH, '//label[@for="tree-node-home"]/span[1]')
+    check_box.click()
+    if check_box.is_selected():
+        print('Чек-бокс выбран')
+    else:
+        print('Чек-бокс не выбран')
+    sleep(2)
     # Завершение работы браузера
     ibrowser.quit()
     print(f'Процесс браузера {browser.__name__} завершен\n\n')

@@ -33,15 +33,6 @@ class ChromeBrowser:
         """
         self.driver.quit()
 
-    def send_keys_by_id(self, valueID: str, data: str):
-        """
-        Ввод текстовой информации "data" в элемент на странице по его "valueID"
-        :param valueID: ID элемента на странице
-        :param data: вводимая текстовая информация
-        """
-        field = self.driver.find_element(By.ID, valueID)
-        field.send_keys(data)
-
     def send_keys_by_xpath(self, xpath: str, data: str):
         """
         Ввод текстовой информации "data" в элемент на странице по его "xpath"
@@ -58,63 +49,3 @@ class ChromeBrowser:
         """
         field = self.driver.find_element(By.XPATH, xpath)
         field.click()
-
-    def check_current_url(self, url_check: str):
-        """
-        Проверка соответствия адреса текущей страницы браузера контрольному "url_check"
-        :param url_check: контрольный адрес страницы
-        """
-        assert url_check == self.driver.current_url, (f'Текущая страница браузера не соответствует контрольной '
-                                                      f'"{url_check}"')
-        print(f'Текущая страница браузера соответствует контрольной "{url_check}".\n\tПроверка проведена успешно')
-
-    def check_by_element_on_page(self, check_element: str, xpath: str):
-        """
-        Проверка наличия контрольного элемента (по названию) "check_element" на странице по его "xpath"
-        :param check_element: название контрольного элемента страницы
-        :param xpath: XPATH элемента на странице
-        :return:
-        """
-        assert check_element == self.driver.find_element(By.XPATH, xpath).text, (f'Контрольный элемент '
-                                                                                 f'{check_element} не найден')
-        print(f'Проверка наличия контрольного элемента "{check_element}" проведена успешно')
-
-    def check_element_and_his_null_text(self, xpath: str):
-        """
-        Для проверки наличия динамичных элементов (в данной работе проверка наличия окна ошибки авторизации)
-        :param xpath: XPATH элемента на странице
-        :return:
-        """
-        try:
-            text = self.driver.find_element(By.XPATH, xpath).text
-        except NoSuchElementException:
-            pass
-        else:
-            assert text == '', text
-
-    def make_screenshot(self, screenshot_name: str):
-        """
-        Сделать скриншот страницы и сохранить его в папку media_report
-        :param screenshot_name: к имени будет добавлена текущая дата и время
-        :return:
-        """
-        now = datetime.now().strftime('%d.%m.%Y, %H.%M.%S')
-        self.driver.save_screenshot(f'media_report/{screenshot_name} {now}.png')
-        print('Скриншот сохранен!')
-
-    def get_elements_as_list_by_xpath(self, xpath):
-        """
-        Элементы на странице по их XPATH в виде списка (find_elements(By.XPATH))
-        :param xpath: XPATH элементов на странице
-        :return: elements - список элементов на странице
-        """
-        elements = self.driver.find_elements(By.XPATH, xpath)
-        return elements
-
-    def scroll_to_element(self, element):
-        """
-        Скроллинг страницы до element
-        :param element:
-        :return:
-        """
-        ActionChains(self.driver).move_to_element(element).perform()
