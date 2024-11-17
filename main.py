@@ -1,4 +1,4 @@
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 
 from chromebrowser import ChromeBrowser
@@ -7,7 +7,7 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://demoqa.com/radio-button'
+url_base = 'https://demoqa.com/buttons'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -21,18 +21,15 @@ for browser in browser_tuple:
     ibrowser.get_url(url_base)
 
     # Домашнее задание
-    radio_button_1 = ibrowser.driver.find_element(By.XPATH, '//label[@for="yesRadio"]')
-    radio_button_2 = ibrowser.driver.find_element(By.XPATH, '//label[@for="impressiveRadio"]')
+    double_click_btn = ibrowser.driver.find_element(By.XPATH, '//button[@id="doubleClickBtn"]')
+    right_click_btn = ibrowser.driver.find_element(By.XPATH, '//button[@id="rightClickBtn"]')
 
-    radio_button_1.click()
-    print(f'Переключатель один статус нажатия: {radio_button_1.find_element(By.XPATH, '..//input[1]').is_selected()}')
-    print(f'Переключатель два статус нажатия: {radio_button_2.find_element(By.XPATH, '..//input[1]').is_selected()}')
-    sleep(2)
+    action = ActionChains(ibrowser.driver)
+    action.double_click(double_click_btn).perform()
+    print('double_click_btn')
+    action.context_click(right_click_btn).perform()
+    print('right_click_btn')
 
-    radio_button_2.click()
-    print(f'Переключатель один статус нажатия: {radio_button_1.find_element(By.XPATH, '..//input[1]').is_selected()}')
-    print(f'Переключатель два статус нажатия: {radio_button_2.find_element(By.XPATH, '..//input[1]').is_selected()}')
-    sleep(2)
 
     # Завершение работы браузера
     ibrowser.quit()
