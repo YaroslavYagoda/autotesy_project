@@ -1,13 +1,13 @@
+import datetime
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
-
 from chromebrowser import ChromeBrowser
 from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://demoqa.com/buttons'
+url_base = 'https://demoqa.com/date-picker'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -21,15 +21,15 @@ for browser in browser_tuple:
     ibrowser.get_url(url_base)
 
     # Домашнее задание
-    double_click_btn = ibrowser.driver.find_element(By.XPATH, '//button[@id="doubleClickBtn"]')
-    right_click_btn = ibrowser.driver.find_element(By.XPATH, '//button[@id="rightClickBtn"]')
+    ibrowser.send_keys_by_xpath('//input[@id="datePickerMonthYearInput"]', Keys.CONTROL + 'A')
+    ibrowser.send_keys_by_xpath('//input[@id="datePickerMonthYearInput"]', Keys.DELETE)
 
-    action = ActionChains(ibrowser.driver)
-    action.double_click(double_click_btn).perform()
-    print('double_click_btn')
-    action.context_click(right_click_btn).perform()
-    print('right_click_btn')
+    current_data = datetime.datetime.now() + datetime.timedelta(days=10)
+    # На видео в уроке указан не правильный формат вывода даты
+    current_data = current_data.strftime('%m/%d/%y')
 
+    ibrowser.send_keys_by_xpath('//input[@id="datePickerMonthYearInput"]', current_data)
+    sleep(2)
 
     # Завершение работы браузера
     ibrowser.quit()
