@@ -49,3 +49,12 @@ class ChromeBrowser:
         """
         field = self.driver.find_element(By.XPATH, xpath)
         field.click()
+
+    def value_by_xpath(self, xpath: str, ):
+        """
+        Значение элемента в виде текста по его "xpath"
+        :param xpath: XPATH элемента на странице
+        :return: text
+        """
+        field = self.driver.find_element(By.XPATH, xpath)
+        return field.text
