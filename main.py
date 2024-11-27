@@ -9,7 +9,7 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://www.saucedemo.com/'
+url_base = 'https://demoqa.com/browser-windows'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -24,16 +24,27 @@ for browser in browser_tuple:
     sleep(1)
 
     # Домашнее задание
-    # Подготовка исходных данных
-    user_name_locator = '//input[@id="user-name"]'
-    fake = Faker('en_US')
-    fake_name = fake.first_name()
-    print(f'Создано фейковое имя: {fake_name}')
+    ibrowser.click_by_xpath('//button[@id="tabButton"]')
+    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[1])
+    assert ibrowser.value_by_xpath('//h1[@id="sampleHeading"]') == 'This is a sample page', \
+        f'Проверка перехода не пройдена'
+    print('Проверка создания и перехода на новую вкладку пройдена')
+    sleep(1)
+    # Переключение на предыдущую вкладку
+    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[0])
 
-    # Ввод данных фейковых данных
-    ibrowser.send_keys_by_xpath(user_name_locator, fake_name)
-    print('Фейковое имя введенов строку логина')
-    sleep(2)
+    # Новое окно
+    ibrowser.click_by_xpath('//button[@id="windowButton"]')
+    # странно что в уроке никто не отметил что все вкладки и окна идут в едином списке
+    # driver.window_handles, и если не закрыть вкладку, то новое окно третье по счету, а не второе
+    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[2])
+    sleep(1)
+    assert ibrowser.value_by_xpath('//h1[@id="sampleHeading"]') == 'This is a sample page', \
+        f'Проверка перехода не пройдена'
+    print('Проверка создания и перехода на новое окно пройдена')
+    # Переключение на предыдущую вкладку
+    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[0])
+    sleep(3)
 
     # Завершение работы браузера
     ibrowser.quit()
