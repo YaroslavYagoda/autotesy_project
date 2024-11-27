@@ -27,12 +27,6 @@ class ChromeBrowser:
         self.driver.get(url)
         self.driver.maximize_window()
 
-    def quit(self):
-        """
-        Закрытие браузера
-        """
-        self.driver.quit()
-
     def send_keys_by_xpath(self, xpath: str, data: str):
         """
         Ввод текстовой информации "data" в элемент на странице по его "xpath"
@@ -58,3 +52,9 @@ class ChromeBrowser:
         """
         field = self.driver.find_element(By.XPATH, xpath)
         return field.text
+
+    def quit(self):
+        """
+        Закрытие браузера
+        """
+        self.driver.quit()

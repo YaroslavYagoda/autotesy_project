@@ -8,7 +8,7 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://www.lambdatest.com/selenium-playground/simple-form-demo '
+url_base = 'https://www.lambdatest.com/selenium-playground/iframe-demo/'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -20,27 +20,35 @@ for browser in browser_tuple:
 
     # Загрузка сайта
     ibrowser.get_url(url_base)
-    sleep(0.5)
+    sleep(1)
 
-    # Домашнее задание часть 1
+    # Домашнее задание
+    # Переключение на вложенный контейнер
+    iframe = ibrowser.driver.find_element(By.XPATH, '//iframe[@id="iFrame1"]')
+    ibrowser.driver.switch_to.frame(iframe)
+
+    # Подготовка исходных данных
+    text_box_locator = '//div[@class="rsw-ce"]'
     text_input = 'Test message'
-    ibrowser.send_keys_by_xpath('//input[@id="user-message"]', text_input)
-    ibrowser.click_by_xpath('//button[@id="showInput"]')
-    text_result = ibrowser.value_by_xpath('//p[@id="message"]')
-    assert text_result == text_input, f'Получен ответ{text_result}, ожидается {text_input}'
-    print('Проверка 1 пройдена')
-    sleep(2)
+    button_bold_locator = '//button[@title="Bold"]'
+    button_italic_locator = '//button[@title="Italic"]'
 
-    # Домашнее задание часть 2
-    value_1 = 5
-    value_2 = 7
-    ibrowser.send_keys_by_xpath('//input[@id="sum1"]', str(value_1))
-    ibrowser.send_keys_by_xpath('//input[@id="sum2"]', str(value_2))
-    ibrowser.click_by_xpath('//button[@class="mt-20 mb-10 bg-lambda-900 hover:bg-transparent hover:text-lambda-900'
-                            ' border border-lambda-900 text-white rounded p-10 focus:outline-none w-180 "]')
-    sum_result = ibrowser.value_by_xpath('//p[@id="addmessage"]')
-    assert sum_result == str(value_1 + value_2), f'Получент результат:{sum_result}, ожидается {value_1 + value_2}'
-    print('Проверка 2 пройдена')
+    # Вdод текста в поле и проверка корректности ввода
+    ibrowser.send_keys_by_xpath(text_box_locator, Keys.CONTROL+"A")
+    ibrowser.send_keys_by_xpath(text_box_locator, Keys.DELETE)
+    ibrowser.send_keys_by_xpath(text_box_locator, text_input)
+    text_result = ibrowser.value_by_xpath(text_box_locator)
+    assert text_input == text_result, f'Ожидается:{text_input}, получено: {text_result} '
+    print('Текст введен корректно')
+    sleep(0.2)
+
+    # Редактирование текста и проверка его корректности после изменений
+    ibrowser.send_keys_by_xpath(text_box_locator, Keys.CONTROL + "A")
+    ibrowser.click_by_xpath(button_bold_locator)
+    ibrowser.click_by_xpath(button_italic_locator)
+    text_result = ibrowser.value_by_xpath(text_box_locator)
+    assert text_input == text_result, f'Ожидается:{text_input}, получено: {text_result} '
+    print('Текст после изменения внешнего вида корректен')
     sleep(2)
 
     # Завершение работы браузера
