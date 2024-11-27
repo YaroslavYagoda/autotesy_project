@@ -29,6 +29,7 @@ for browser in browser_tuple:
     fake = Faker('en_US')
     fake_name = fake.first_name()
     print(f'Создано фейковое имя: {fake_name}')
+
     # Ввод данных фейковых данных
     ibrowser.send_keys_by_xpath(user_name_locator, fake_name)
     print('Фейковое имя введенов строку логина')
