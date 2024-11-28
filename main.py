@@ -25,8 +25,8 @@ for browser in browser_tuple:
 
     # Домашнее задание
     tuple_button_locators = ('//button[@onclick="jsAlert()"]',
-                            '//button[@onclick="jsConfirm()"]',
-                            '//button[@onclick="jsPrompt()"]',)
+                             '//button[@onclick="jsConfirm()"]',
+                             '//button[@onclick="jsPrompt()"]',)
 
     # В цикле будут нажаты все кнопки и обработаны все предупреждения с методом .accept()
     for button_locator in tuple_button_locators:
