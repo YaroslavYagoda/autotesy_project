@@ -9,7 +9,7 @@ from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
 
-url_base = 'https://demoqa.com/browser-windows'
+url_base = 'https://the-internet.herokuapp.com/javascript_alerts'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -24,27 +24,24 @@ for browser in browser_tuple:
     sleep(1)
 
     # Домашнее задание
-    ibrowser.click_by_xpath('//button[@id="tabButton"]')
-    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[1])
-    assert ibrowser.value_by_xpath('//h1[@id="sampleHeading"]') == 'This is a sample page', \
-        f'Проверка перехода не пройдена'
-    print('Проверка создания и перехода на новую вкладку пройдена')
-    sleep(1)
-    # Переключение на предыдущую вкладку
-    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[0])
+    tuple_button_locators = ('//button[@onclick="jsAlert()"]',
+                            '//button[@onclick="jsConfirm()"]',
+                            '//button[@onclick="jsPrompt()"]',)
 
-    # Новое окно
-    ibrowser.click_by_xpath('//button[@id="windowButton"]')
-    # странно что в уроке никто не отметил что все вкладки и окна идут в едином списке
-    # driver.window_handles, и если не закрыть вкладку, то новое окно третье по счету, а не второе
-    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[2])
-    sleep(1)
-    assert ibrowser.value_by_xpath('//h1[@id="sampleHeading"]') == 'This is a sample page', \
-        f'Проверка перехода не пройдена'
-    print('Проверка создания и перехода на новое окно пройдена')
-    # Переключение на предыдущую вкладку
-    ibrowser.driver.switch_to.window(ibrowser.driver.window_handles[0])
-    sleep(3)
+    # В цикле будут нажаты все кнопки и обработаны все предупреждения с методом .accept()
+    for button_locator in tuple_button_locators:
+        button_name = ibrowser.value_by_xpath(button_locator)
+        ibrowser.click_by_xpath(button_locator)
+        print(f'Нажата кнопка "{button_name}"')
+        try:
+            ibrowser.driver.switch_to.alert.send_keys('Test string')
+            print(f'Предупреждению по кнопке "{button_name}" передан текст')
+        except Exception:
+            pass
+        finally:
+            ibrowser.driver.switch_to.alert.accept()
+            print(f'В предупреждении по кнопке "{button_name}" нажато подтвердить (ОК)\n')
+            sleep(2)
 
     # Завершение работы браузера
     ibrowser.quit()
