@@ -32,7 +32,6 @@ for browser in browser_tuple:
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write(fake.sentence(nb_words=5))
     file_path = os.path.abspath(file_name)
-
     # Загружаем файл в браузер и проверяем статус загрузки
     try:
         ibrowser.send_keys_by_xpath('//input[@type="file"]', file_path)
@@ -40,11 +39,11 @@ for browser in browser_tuple:
         assert ibrowser.value_by_xpath('//div[@id="error"]') == 'File Successfully Uploaded', \
             f'Ошибка загрузки файла: {ibrowser.value_by_xpath('//div[@id="error"]')}\n'
         print(f'Файл "{file_name}" успешно загружен на сайт')
+        file_name_in_browser = ibrowser.driver.find_element(By.XPATH, '//input[@type="file"]').get_attribute('value')
+        assert file_name_in_browser[-len(file_name):] == file_name, f'Загружен не тот файл!!'
+        print('Имя загруженного файла совпадает с исходным')
     except AssertionError as err:
         print(err.args[0])
-
-    # Лектор так уверенно сказал что можно проверить имя загруженного файла
-    # что хотелось бы понять как...
 
     # Удаление файла
     os.remove(file_path)
