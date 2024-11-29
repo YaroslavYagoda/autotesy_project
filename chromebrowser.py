@@ -1,3 +1,5 @@
+import os
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -14,9 +16,20 @@ class ChromeBrowser:
 
     def __init__(self):
         options = webdriver.ChromeOptions()
+        path_for_download = os.path.dirname(os.path.abspath(__file__)) + '\\downloads'
+        prefs = {'download.default_directory': path_for_download}
+        options.add_experimental_option('prefs', prefs)
         options.add_experimental_option('detach', True)
         options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
+        self.create_download_dir()
+
+    def create_download_dir(self):
+        path_for_download = os.path.dirname(os.path.abspath(__file__)) + '\\downloads'
+        try:
+            os.mkdir(path_for_download)
+        except Exception:
+            pass
 
     def get_url(self, url: str):
         """
