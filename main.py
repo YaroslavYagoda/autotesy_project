@@ -1,4 +1,5 @@
 import datetime
+
 from faker import Faker
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
@@ -8,8 +9,9 @@ from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
 from firefoxbrowser import FireFox
 from time import sleep
+import os
 
-url_base = 'https://the-internet.herokuapp.com/javascript_alerts'
+url_base = 'https://www.lambdatest.com/selenium-playground/upload-file-demo'
 
 # родитель: класс ChromeBrowser, дочки: YaBrowser(ручное обновление), MsEdge, FireFox
 # для проверки оставь в кортеже те который есть у тебя (для этого импортировал все классы)
@@ -24,24 +26,29 @@ for browser in browser_tuple:
     sleep(1)
 
     # Домашнее задание
-    tuple_button_locators = ('//button[@onclick="jsAlert()"]',
-                             '//button[@onclick="jsConfirm()"]',
-                             '//button[@onclick="jsPrompt()"]',)
+    # создаём текстовый файл для загрузки
+    fake = Faker('ru_RU')
+    file_name = fake.text(max_nb_chars=7) + 'pdf'  # поменять на txt для теста ошибки загрузки
+    with open(file_name, 'w', encoding='utf-8') as f:
+        f.write(fake.sentence(nb_words=5))
+    file_path = os.path.abspath(file_name)
 
-    # В цикле будут нажаты все кнопки и обработаны все предупреждения с методом .accept()
-    for button_locator in tuple_button_locators:
-        button_name = ibrowser.value_by_xpath(button_locator)
-        ibrowser.click_by_xpath(button_locator)
-        print(f'Нажата кнопка "{button_name}"')
-        try:
-            ibrowser.driver.switch_to.alert.send_keys('Test string')
-            print(f'Предупреждению по кнопке "{button_name}" передан текст')
-        except Exception:
-            pass
-        finally:
-            ibrowser.driver.switch_to.alert.accept()
-            print(f'В предупреждении по кнопке "{button_name}" нажато подтвердить (ОК)\n')
-            sleep(2)
+    # Загружаем файл в браузер и проверяем статус загрузки
+    try:
+        ibrowser.send_keys_by_xpath('//input[@type="file"]', file_path)
+        sleep(1)
+        assert ibrowser.value_by_xpath('//div[@id="error"]') == 'File Successfully Uploaded', \
+            f'Ошибка загрузки файла: {ibrowser.value_by_xpath('//div[@id="error"]')}\n'
+        print(f'Файл "{file_name}" успешно загружен на сайт')
+    except AssertionError as err:
+        print(err.args[0])
+
+    # Лектор так уверенно сказал что можно проверить имя загруженного файла
+    # что хотелось бы понять как...
+
+    # Удаление файла
+    os.remove(file_path)
+    print(f'Файл "{file_name}" успешно удален')
 
     # Завершение работы браузера
     ibrowser.quit()
