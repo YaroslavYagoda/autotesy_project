@@ -42,7 +42,7 @@ def choice_browser():
     return tuple_of_browser[choice_of_answer(browser_query, browser_action) - 1]
 
 
-class Smoke_Test_Swag_labs():
+class SmokeTestSwagLabs():
     """
     Класс с тестами в виде методов
     """
