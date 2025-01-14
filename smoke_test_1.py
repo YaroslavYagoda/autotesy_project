@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ES
 from selenium.webdriver.support.wait import WebDriverWait
 
+import login_page
 from chromebrowser import ChromeBrowser
 from yandexbrowser import YaBrowser
 from msedgebrowser import MsEdge
@@ -53,15 +54,13 @@ class SmokeTestSwagLabs():
         """
         Метод для SmokeTest сайта "Swag Labs"
         """
-        print('Ожидайте загрузки товаров....🔁')
+        print('Ожидайте авторизации и загрузки товаров....🔁')
         # Загрузка сайта
         self.ibrowser.get_url(url_base)
-        WebDriverWait(self.ibrowser.driver, 10).until(ES.element_to_be_clickable((By.XPATH, login_button)))
 
         # Авторизация на сайте
-        self.ibrowser.send_keys_by_xpath(login_input, login)
-        self.ibrowser.send_keys_by_xpath(password_input, password)
-        self.ibrowser.click_by_xpath(login_button)
+        auth = login_page.LoginPage(self.ibrowser)
+        auth.authorithation(login='problem_user')
 
         # Получение товара и предложение его пользователю + выбор
         WebDriverWait(self.ibrowser.driver, 10).until(ES.element_to_be_clickable((By.XPATH, shop_cart_link)))
@@ -83,6 +82,8 @@ class SmokeTestSwagLabs():
         assert user_product_price == self.ibrowser.value_by_xpath(product_prices)[
                                      -5:], 'Ошибка!! Цена в корзине отличается'
 
+        # По заданию код ниже не нужен
+        """
         # Создание данных на покупателя (фейковых)
         fake = Faker('en_US')
         first_name = fake.first_name()
@@ -112,6 +113,7 @@ class SmokeTestSwagLabs():
         print(
             f'\nВаш товар "{user_product_name}" оформлен, не забудьте покормить морковкой Пони,'
             f'которая привезет вам его😀')
+        """
 
         # Завершение работы браузера
         self.ibrowser.quit()
